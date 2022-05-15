@@ -1,4 +1,4 @@
-package com.expense.tracker.expensetracker.entity;
+package com.expense.tracker.expensetracker.entity.auth;
 
 import javax.persistence.*;
 

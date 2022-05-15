@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.expense.tracker.expensetracker.entity.ERole;
-import com.expense.tracker.expensetracker.entity.Role;
-import com.expense.tracker.expensetracker.entity.User;
+import com.expense.tracker.expensetracker.entity.auth.ERole;
+import com.expense.tracker.expensetracker.entity.auth.Role;
+import com.expense.tracker.expensetracker.entity.auth.User;
 import com.expense.tracker.expensetracker.repository.RoleRepository;
 import com.expense.tracker.expensetracker.repository.UserRepository;
 import com.expense.tracker.expensetracker.request.dto.LoginRequest;

@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.expense.tracker.expensetracker.entity.User;
+import com.expense.tracker.expensetracker.entity.auth.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 

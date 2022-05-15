@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.expense.tracker.expensetracker.entity.User;
+import com.expense.tracker.expensetracker.entity.auth.User;
 import com.expense.tracker.expensetracker.repository.UserRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{

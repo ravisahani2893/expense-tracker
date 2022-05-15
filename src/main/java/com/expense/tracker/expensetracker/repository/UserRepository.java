@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.expense.tracker.expensetracker.entity.User;
+import com.expense.tracker.expensetracker.entity.auth.User;
 
 @Repository
 public interface UserRepository extends org.springframework.data.jpa.repository.JpaRepository<User,Long>  {

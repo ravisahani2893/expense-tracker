@@ -1,4 +1,4 @@
-package com.expense.tracker.expensetracker.entity;
+package com.expense.tracker.expensetracker.entity.auth;
 
 public enum ERole {
   ROLE_USER,
