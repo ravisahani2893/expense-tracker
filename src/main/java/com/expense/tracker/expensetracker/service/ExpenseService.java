@@ -1,7 +1,14 @@
 package com.expense.tracker.expensetracker.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +27,8 @@ import com.expense.tracker.expensetracker.response.dto.ExpenseResponse;
 
 @Service
 public class ExpenseService {
+	
+	
 
 	@Autowired
 	private UserRepository userRepository;
@@ -32,6 +41,8 @@ public class ExpenseService {
 
 	@Autowired
 	private PaymentTypeRepository paymentTypeRepository;
+	
+	private Logger logger = LoggerFactory.getLogger(ExpenseService.class);
 	
 	public Expense save(UserDetails userDetails,  ExpenseRequest request) throws Exception {
 		
@@ -58,14 +69,38 @@ public class ExpenseService {
 		return null;
 	}
 	
-	public List<ExpenseResponse> list(UserDetails userDetails){
+	public List<ExpenseResponse> list(UserDetails userDetails,String fromDate, String toDate){
 		User user= userRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetails.getUsername()));
+		if(fromDate != null && toDate != null) {
+			return repository.listExpenseByDate(user.getId(), fromDate, toDate); 
+			
+			
+		}
+		
 		return repository.listExpense(user.getId());
+	}
+	public List<ExpenseResponse> listExpenseCurrentMonth(UserDetails userDetails){
+		User user= userRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetails.getUsername()));
+		 LocalDate currentdate = LocalDate.now();
+		 int year = currentdate.getYear();
+		 int month = currentdate.getMonthValue();
+		 logger.info("Month and Year {} {}" ,month,year);
+		return repository.listExpenseCurrentMonth(user.getId(),month,year);
 	}
 	
 	public List<ExpenseResponse> listExpenseByCategory(UserDetails userDetails,Long categoryId){
 		User user= userRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetails.getUsername()));
 		return repository.listExpenseByCategory(user.getId(),categoryId);
 	}
+	
+	public List<ExpenseResponse> listExpenseCurrentMonthByCategory(UserDetails userDetails,Long categoryId){
+		User user= userRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetails.getUsername()));
+		 LocalDate currentdate = LocalDate.now();
+		 int year = currentdate.getYear();
+		 int month = currentdate.getMonthValue();
+		 logger.info("Month and Year {} {}" ,month,year);
+		return repository.listExpenseCurrentMonthByCategory(user.getId(),categoryId,month,year);
+	}
+
 
 }
