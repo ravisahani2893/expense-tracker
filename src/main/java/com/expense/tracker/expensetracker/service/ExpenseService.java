@@ -62,5 +62,10 @@ public class ExpenseService {
 		User user= userRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetails.getUsername()));
 		return repository.listExpense(user.getId());
 	}
+	
+	public List<ExpenseResponse> listExpenseByCategory(UserDetails userDetails,Long categoryId){
+		User user= userRepository.findByUsername(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetails.getUsername()));
+		return repository.listExpenseByCategory(user.getId(),categoryId);
+	}
 
 }

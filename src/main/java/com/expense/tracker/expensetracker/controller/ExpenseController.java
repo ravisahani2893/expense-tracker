@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +38,12 @@ public class ExpenseController {
 		return service.list(userDetails);
 	}
 	
+	@GetMapping("/api/expense/category/{categoryId}")
+	public List<ExpenseResponse> listExpenseByCategory(@PathVariable Long categoryId){
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		return service.listExpenseByCategory(userDetails, categoryId);
 	
+	}
 
 }

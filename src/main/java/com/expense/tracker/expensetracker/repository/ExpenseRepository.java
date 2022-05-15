@@ -14,5 +14,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 	@Query("select new com.expense.tracker.expensetracker.response.dto.ExpenseResponse(ex.id,ex.expenseAmount,ex.expenseDescription,c.name,p.type) from Expense ex INNER JOIN Category c ON ex.category.id = c.id INNER JOIN PaymentType p ON  ex.payment.id = p.id where c.user.id = :userId ORDER BY ex.id desc" )
 	List<ExpenseResponse> listExpense(@Param("userId") Long userId);
 	
-	
+	@Query("select new com.expense.tracker.expensetracker.response.dto.ExpenseResponse(ex.id,ex.expenseAmount,ex.expenseDescription,c.name,p.type) from Expense ex INNER JOIN Category c ON ex.category.id = c.id INNER JOIN PaymentType p ON  ex.payment.id = p.id where c.user.id = :userId and c.id = :categoryId ORDER BY ex.id desc" )
+	List<ExpenseResponse> listExpenseByCategory(@Param("userId") Long userId,@Param("categoryId") Long categoryId);
 }
