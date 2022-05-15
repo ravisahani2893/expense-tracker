@@ -14,6 +14,10 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "expense")
@@ -36,9 +40,13 @@ public class Expense {
 	@Column(name="expense_desc")
 	private String expenseDescription;
 	
+	@Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name = "created_at")
 	private Date createdAt;
 
+	@Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name = "updated_at")
 	private Date updatedAt;
 	
