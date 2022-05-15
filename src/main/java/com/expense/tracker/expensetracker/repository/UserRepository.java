@@ -2,6 +2,7 @@ package com.expense.tracker.expensetracker.repository;
 
 import java.util.Optional;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.expense.tracker.expensetracker.entity.auth.User;

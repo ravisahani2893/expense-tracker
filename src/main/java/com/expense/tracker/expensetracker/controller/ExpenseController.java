@@ -1,5 +1,7 @@
 package com.expense.tracker.expensetracker.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,29 +13,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.expense.tracker.expensetracker.entity.expensetracker.Category;
-import com.expense.tracker.expensetracker.request.dto.CategoryRequest;
-import com.expense.tracker.expensetracker.response.dto.CategoryResponse;
-import com.expense.tracker.expensetracker.service.CategoryService;
+import com.expense.tracker.expensetracker.entity.expensetracker.Expense;
+import com.expense.tracker.expensetracker.request.dto.ExpenseRequest;
+import com.expense.tracker.expensetracker.response.dto.ExpenseResponse;
+import com.expense.tracker.expensetracker.service.ExpenseService;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-public class CategoryController {
-
+public class ExpenseController {
+	
 	@Autowired
-	private CategoryService categoryService;
+	private ExpenseService service;
 
-	@GetMapping("/api/category")
-	public CategoryResponse list() {
+	@PostMapping("/api/expense")
+	public Expense save(@Valid @RequestBody ExpenseRequest request) throws Exception {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		return categoryService.list(userDetails);
-
+		return service.save(userDetails,request);
 	}
 	
-	@PostMapping("/api/category")
-	public Category save(@Valid @RequestBody CategoryRequest categoryRequest) {
+	@GetMapping("/api/expense")
+	public List<ExpenseResponse> list(){
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return categoryService.save(userDetails, categoryRequest);
+		return service.list(userDetails);
 	}
+	
+	
 
 }
