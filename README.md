@@ -3,9 +3,15 @@
 Expense Tracker Management System  will keep  track of Income-Expense on a day to day basics.
 
 # Technologies Used
-Spring Boot
-Spring Security
-Spring Data JPA
-MySql DB
-Hibernate
-Maven
+1. Spring Boot
+2. Spring Security
+3. Spring Data JPA
+4. JWT
+5. MySql Database
+6. Hibernate
+7. Maven
+8. Spring Boot Devtools
+
+
+
+
