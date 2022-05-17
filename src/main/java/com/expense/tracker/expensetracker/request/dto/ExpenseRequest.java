@@ -2,14 +2,19 @@ package com.expense.tracker.expensetracker.request.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class ExpenseRequest {
 
+	@NotNull(message="Amount should not be null.")
+	@Min(value = 0L, message = "Amount value must be positive.")
 	private BigDecimal amount;
 	
 	private String expenseDescription;
-	
+	@NotNull(message="Payment Type Id should not be null.")
 	private Long paymentId;
-	
+	@NotNull(message="Category Id should not be null.")
 	private Long categoryId;
 
 	public BigDecimal getAmount() {

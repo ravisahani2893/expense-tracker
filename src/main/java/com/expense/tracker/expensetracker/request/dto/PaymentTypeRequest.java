@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 
 public class PaymentTypeRequest {
 	
-	@NotBlank
+	@NotBlank(message="Payment type should not be blank")
 	private String type;
 
 	public String getType() {

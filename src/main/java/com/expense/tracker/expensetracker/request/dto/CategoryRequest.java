@@ -1,10 +1,12 @@
 package com.expense.tracker.expensetracker.request.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class CategoryRequest {
 
-	@NotBlank
+	@NotNull(message="Category name should not be null.")
+	@NotBlank(message="Category name should not be blank.")
 	private String name;
 
 	public String getName() {
