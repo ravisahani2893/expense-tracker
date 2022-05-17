@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.expense.tracker.expensetracker.entity.expensetracker.PaymentType;
+import com.expense.tracker.expensetracker.exception.handler.EntityException;
 import com.expense.tracker.expensetracker.repository.PaymentTypeRepository;
 import com.expense.tracker.expensetracker.request.dto.PaymentTypeRequest;
 import com.expense.tracker.expensetracker.request.dto.UpdatePaymentTypeRequest;
@@ -32,7 +33,7 @@ public class PaymentService {
 	}
 	
 	public PaymentType update(Long paymentId,UpdatePaymentTypeRequest request) throws Exception {
-		PaymentType type=repository.findById(paymentId).orElseThrow(() -> new Exception("Payment Type not found"));
+		PaymentType type=repository.findById(paymentId).orElseThrow(() -> new EntityException("Payment Type not found"));
 		type.setType(request.getType());
 		type.setActive(request.isActive());
 		return repository.save(type);
