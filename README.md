@@ -32,3 +32,99 @@ Follow the step below to get the application up and running on your local machin
 ```
  6. Access the application by url http://localhost:9001 in any web browser.
 
+
+
+# Test services via Postman
+
+1. User Registration
+``` javascript
+API : {{url}}/api/auth/signup
+
+Request:
+{
+    "username":"testuser",
+    "email":"testuser@gmail.com",
+    "password":"123456"
+}
+
+Response:
+{
+    "message": "User registered successfully!"
+}
+
+```
+
+2. User Login
+``` javascript
+API : {{url}}/api/auth/signin
+
+Request:
+{
+    "username":"testuser",
+    "password":"123456"
+}
+
+Response:
+{
+    "id": 3,
+    "username": "testuser",
+    "email": "testuser@gmail.com",
+    "roles": [
+        "ROLE_USER"
+    ],
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTY1Mjg4MDk4NiwiZXhwIjoxNjUyOTY3Mzg2fQ.xMy8xN9cv7YTkDJ0zPZMo_INpDMZqdKnYAhgLTLfYHB-VWtmdhqOQ1kh-5yx6P6Wwc_QyM1JA_j8zksd4o5OWw",
+    "tokenType": "Bearer"
+}
+
+```
+
+3. List Category
+
+``` javascript
+API : {{url}}/api/category
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Response:
+{
+    "userId": 3,
+    "categories": [
+        {
+            "id": 6,
+            "name": "Health Care",
+            "createdAt": "2022-05-18T13:38:59.000+00:00",
+            "updatedAt": "2022-05-18T13:38:59.000+00:00",
+            "active": true
+        }
+    ]
+}
+
+```
+
+4. Create Category
+``` javascript
+API : {{url}}/api/category
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Request:
+{
+    "name":"Health Care"
+}
+
+Response:
+{
+    "id": 6,
+    "name": "Health Care",
+    "createdAt": "2022-05-18T13:38:58.527+00:00",
+    "updatedAt": "2022-05-18T13:38:58.527+00:00",
+    "active": true
+}
+
+```
