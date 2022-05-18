@@ -34,7 +34,7 @@ Follow the step below to get the application up and running on your local machin
 
 
 
-# Test services via Postman
+# Testing Rest API via Postman
 
 1. User Registration
 ``` javascript
@@ -78,7 +78,32 @@ Response:
 
 ```
 
-3. List Category
+3. Create Category
+``` javascript
+API : {{url}}/api/category
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Request:
+{
+    "name":"Health Care"
+}
+
+Response:
+{
+    "id": 6,
+    "name": "Health Care",
+    "createdAt": "2022-05-18T13:38:58.527+00:00",
+    "updatedAt": "2022-05-18T13:38:58.527+00:00",
+    "active": true
+}
+
+```
+
+4. List Category
 
 ``` javascript
 API : {{url}}/api/category
@@ -104,9 +129,9 @@ Response:
 
 ```
 
-4. Create Category
+5. Create Payment Type
 ``` javascript
-API : {{url}}/api/category
+API : {{url}}/api/paymenttype
 
 Headers:
 {
@@ -115,16 +140,232 @@ Headers:
 
 Request:
 {
-    "name":"Health Care"
+    "type":"UPI"
 }
 
 Response:
 {
     "id": 6,
-    "name": "Health Care",
-    "createdAt": "2022-05-18T13:38:58.527+00:00",
-    "updatedAt": "2022-05-18T13:38:58.527+00:00",
+    "type": "UPI",
+    "createdAt": "2022-05-18T13:43:28.901+00:00",
+    "updatedAt": "2022-05-18T13:43:28.901+00:00",
     "active": true
 }
+
+```
+
+6. List Payment Type
+
+``` javascript
+API : {{url}}/api/paymenttype
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Response:
+[
+    {
+        "id": 6,
+        "type": "UPI",
+        "createdAt": "2022-05-18T13:43:29.000+00:00",
+        "updatedAt": "2022-05-18T13:43:29.000+00:00",
+        "active": true
+    }
+]
+
+```
+
+7. Create Expense
+``` javascript
+API : {{url}}/api/expense
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Request:
+
+{
+    "amount":100,
+    "expenseDescription":"Health Product",
+    "paymentId":6,
+    "categoryId":6
+}
+
+Response:
+{
+    "id": 5,
+    "category": {
+        "id": 6,
+        "name": "Health Care",
+        "createdAt": "2022-05-18T13:38:59.000+00:00",
+        "updatedAt": "2022-05-18T13:38:59.000+00:00",
+        "active": true
+    },
+    "payment": {
+        "id": 6,
+        "type": "UPI",
+        "createdAt": "2022-05-18T13:43:29.000+00:00",
+        "updatedAt": "2022-05-18T13:43:29.000+00:00",
+        "active": true
+    },
+    "expenseAmount": 100,
+    "expenseDescription": "Health Product",
+    "createdAt": "2022-05-18T13:47:35.915+00:00",
+    "updatedAt": "2022-05-18T13:47:35.915+00:00"
+}
+
+```
+
+8. List User Expense
+
+``` javascript
+API : {{url}}/api/expense
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Response:
+[
+    {
+        "id": 5,
+        "expenseAmount": 100.00,
+        "expenseDescription": "Health Product",
+        "categoryName": "Health Care",
+        "paymentType": "UPI",
+        "createdAt": "2022-05-18",
+        "updatedAt": "2022-05-18"
+    }
+]
+
+```
+
+9. List User Expense by Date Filter
+
+``` javascript
+API : {{url}}/api/expense?fromDate=2022-05-01&toDate=2022-05-20
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Response:
+[
+    {
+        "id": 5,
+        "expenseAmount": 100.00,
+        "expenseDescription": "Health Product",
+        "categoryName": "Health Care",
+        "paymentType": "UPI",
+        "createdAt": "2022-05-18",
+        "updatedAt": "2022-05-18"
+    }
+]
+
+```
+
+10. List User Current Month Expense
+
+``` javascript
+API : {{url}}/api/expense/currentmonth
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Response:
+[
+    {
+        "id": 5,
+        "expenseAmount": 100.00,
+        "expenseDescription": "Health Product",
+        "categoryName": "Health Care",
+        "paymentType": "UPI",
+        "createdAt": "2022-05-18",
+        "updatedAt": "2022-05-18"
+    }
+]
+
+```
+
+11. List User Expense By Category
+
+``` javascript
+API : {{url}}/api/expense/currentmonth
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Response:
+[
+    {
+        "id": 5,
+        "expenseAmount": 100.00,
+        "expenseDescription": "Health Product",
+        "categoryName": "Health Care",
+        "paymentType": "UPI",
+        "createdAt": "2022-05-18",
+        "updatedAt": "2022-05-18"
+    }
+]
+
+```
+
+12. List User Expense By Category and Date Filter
+
+``` javascript
+API : {{url}}/api/expense/category/6?fromDate=2022-05-01&toDate=2022-05-20
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Response:
+[
+    {
+        "id": 5,
+        "expenseAmount": 100.00,
+        "expenseDescription": "Health Product",
+        "categoryName": "Health Care",
+        "paymentType": "UPI",
+        "createdAt": "2022-05-18",
+        "updatedAt": "2022-05-18"
+    }
+]
+
+```
+
+13. List User Current Month Expense By Category 
+
+``` javascript
+API : {{url}}/api/expense/currentmonth/category/6
+
+Headers:
+{
+    "Authorization":"Bearer {{token}}"
+}
+
+Response:
+[
+    {
+        "id": 5,
+        "expenseAmount": 100.00,
+        "expenseDescription": "Health Product",
+        "categoryName": "Health Care",
+        "paymentType": "UPI",
+        "createdAt": "2022-05-18",
+        "updatedAt": "2022-05-18"
+    }
+]
 
 ```
