@@ -20,7 +20,7 @@ Java 1.8 or greater, Spring boot 2.0 or greater, Maven, IntelliJ or Eclipse
 Follow the step below to get the application up and running on your local machine for development and testing purpose.
 
 
-1. Git clone project in your local machine https://github.com/mohyehia/spring-boot-reset-password.git.
+1. Git clone project in your local machine https://github.com/ravisahani2893/expense-tracker
 2. Import the project in Eclipse.
 3. Create database with name ```expense_tracker``` in MySQL Workbench.
 4. Run the application.
