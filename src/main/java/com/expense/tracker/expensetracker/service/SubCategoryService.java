@@ -8,7 +8,6 @@ import com.expense.tracker.expensetracker.repository.CategoryRepository;
 import com.expense.tracker.expensetracker.repository.SubCategoryRepository;
 import com.expense.tracker.expensetracker.repository.UserRepository;
 import com.expense.tracker.expensetracker.request.dto.SubCategoryRequest;
-import com.expense.tracker.expensetracker.response.dto.CategoryResponse;
 import com.expense.tracker.expensetracker.response.dto.SubCategoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,8 +47,10 @@ public class SubCategoryService {
 	}
 
 	@Transactional
-	public List<SubCategoryResponse> list(Long categoryId){
-		return subCategoryRepository.listSubCategory(categoryId);
+	public List<SubCategoryResponse> list(Long categoryId, UserDetails userDetail){
+		User user= userRepository.findByUsername(userDetail.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetail.getUsername()));
+
+		return subCategoryRepository.listSubCategory(categoryId, user.getId());
 	}
 
 }

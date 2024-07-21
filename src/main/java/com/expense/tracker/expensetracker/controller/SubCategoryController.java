@@ -28,7 +28,8 @@ public class SubCategoryController {
 
 	@GetMapping("/api/subcategory")
 	public List<SubCategoryResponse> list(@RequestParam(required=true,name="categoryId") Long categoryId) {
-		return subCategoryService.list(categoryId);
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return subCategoryService.list(categoryId,userDetails);
 	}
 
 	@PostMapping("/api/subcategory")
