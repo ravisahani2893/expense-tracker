@@ -30,6 +30,10 @@ public class Expense {
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	private Category category;
+
+	@ManyToOne
+	@JoinColumn(name="sub_category_id")
+	private SubCategory subCategoryId;
 	
 	@ManyToOne
 	@JoinColumn(name = "payment_type_id")
@@ -107,6 +111,15 @@ public class Expense {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+
+	public SubCategory getSubCategoryId() {
+		return subCategoryId;
+	}
+
+	public void setSubCategoryId(SubCategory subCategoryId) {
+		this.subCategoryId = subCategoryId;
 	}
 
 	@PrePersist

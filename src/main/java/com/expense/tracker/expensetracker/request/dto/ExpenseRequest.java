@@ -17,6 +17,9 @@ public class ExpenseRequest {
 	@NotNull(message="Category Id should not be null.")
 	private Long categoryId;
 
+	@NotNull(message="Sub Category Id should not be null.")
+	private Long subCategoryId;
+
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -48,9 +51,12 @@ public class ExpenseRequest {
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
-	
-	
-	
-	
 
+	public Long getSubCategoryId() {
+		return subCategoryId;
+	}
+
+	public void setSubCategoryId(Long subCategoryId) {
+		this.subCategoryId = subCategoryId;
+	}
 }

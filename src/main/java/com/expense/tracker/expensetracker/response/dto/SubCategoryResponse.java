@@ -1,38 +1,24 @@
 package com.expense.tracker.expensetracker.response.dto;
 
 import java.util.Date;
-import java.util.List;
 
-import com.expense.tracker.expensetracker.entity.expensetracker.Category;
-
-public class CategoryResponse {
+public class SubCategoryResponse {
 
 	private Long id;
 
-	private Long userId;
 	private String name;
 
 	private Date createdAt;
 	private Date updatedAt;
 
 
-	public CategoryResponse(Long id,String name,Long userId, Date createdAt, Date updatedAt) {
+	public SubCategoryResponse(Long id, String name, Date createdAt, Date updatedAt) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.userId=userId;
 	}
-
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-
 
 	public String getName() {
 		return name;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.expense.tracker.expensetracker.repository.SubCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,7 +25,7 @@ public class CategoryService {
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
 	@Transactional
 	public Category save(UserDetails userDetail,CategoryRequest categoryRequest) {
 		User user= userRepository.findByUsername(userDetail.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetail.getUsername()));
@@ -37,13 +38,9 @@ public class CategoryService {
 	}
 	
 	@Transactional
-	public CategoryResponse list(UserDetails userDetail){
+	public List<CategoryResponse> list(UserDetails userDetail){
 		User user= userRepository.findByUsername(userDetail.getUsername()).orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + userDetail.getUsername()));
-		List<Category> categories=user.getCategory();
-		CategoryResponse categoryResponse=new CategoryResponse();
-		categoryResponse.setUserId(user.getId());
-		categoryResponse.setCategories(categories);
-		return categoryResponse;
+		return categoryRepository.listCategory(user.getId());
 	}
 	
 

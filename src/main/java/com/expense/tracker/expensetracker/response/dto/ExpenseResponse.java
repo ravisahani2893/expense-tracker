@@ -11,17 +11,20 @@ public class ExpenseResponse {
 	private BigDecimal expenseAmount;
 	private String expenseDescription;
 	private String categoryName;
+
+	private String subCategoryName;
 	private String paymentType;
 	private Date createdAt;
 	private Date updatedAt;
 	
 	
 	
-	public ExpenseResponse(Long id, BigDecimal expenseAmount, String expenseDescription, String categoryName,
+	public ExpenseResponse(Long id, BigDecimal expenseAmount, String expenseDescription, String categoryName,String subCategoryName,
 			String paymentType, Date createdAt, Date updatedAt) {
 		super();
 		this.id = id;
 		this.expenseAmount = expenseAmount;
+		this.subCategoryName = subCategoryName;
 		this.expenseDescription = expenseDescription;
 		this.categoryName = categoryName;
 		this.paymentType = paymentType;
@@ -70,10 +73,13 @@ public class ExpenseResponse {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
-	
-	
-	
-	
 
+
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
+	}
 }

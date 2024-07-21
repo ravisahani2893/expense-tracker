@@ -3,6 +3,8 @@ package com.expense.tracker.expensetracker.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.expense.tracker.expensetracker.entity.expensetracker.SubCategory;
+import com.expense.tracker.expensetracker.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,6 @@ import com.expense.tracker.expensetracker.entity.expensetracker.Category;
 import com.expense.tracker.expensetracker.entity.expensetracker.Expense;
 import com.expense.tracker.expensetracker.entity.expensetracker.PaymentType;
 import com.expense.tracker.expensetracker.exception.handler.EntityException;
-import com.expense.tracker.expensetracker.repository.CategoryRepository;
-import com.expense.tracker.expensetracker.repository.ExpenseRepository;
-import com.expense.tracker.expensetracker.repository.PaymentTypeRepository;
-import com.expense.tracker.expensetracker.repository.UserRepository;
 import com.expense.tracker.expensetracker.request.dto.ExpenseRequest;
 import com.expense.tracker.expensetracker.response.dto.ExpenseResponse;
 
@@ -33,6 +31,10 @@ public class ExpenseService {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+
+
+	@Autowired
+	private SubCategoryRepository subCategoryRepository;
 
 	@Autowired	
 	private PaymentTypeRepository paymentTypeRepository;
@@ -56,11 +58,15 @@ public class ExpenseService {
 
 		Category category = categoryRepository.findById(request.getCategoryId())
 				.orElseThrow(() -> new Exception("Category not found"));
+
+		SubCategory subCategory = subCategoryRepository.findById(request.getSubCategoryId())
+				.orElseThrow(() -> new Exception("Sub Category not found"));
 		PaymentType paymentType = paymentTypeRepository.findById(request.getPaymentId())
 				.orElseThrow(() -> new Exception("Payment Type not found"));
 
 		Expense expense = new Expense();
 		expense.setCategory(category);
+		expense.setSubCategoryId(subCategory);
 		expense.setPayment(paymentType);
 		expense.setExpenseAmount(request.getAmount());
 		expense.setExpenseDescription(request.getExpenseDescription());
