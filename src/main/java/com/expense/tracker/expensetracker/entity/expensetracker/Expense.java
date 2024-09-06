@@ -43,6 +43,10 @@ public class Expense {
 	private BigDecimal expenseAmount;
 	@Column(name="expense_desc")
 	private String expenseDescription;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Column(name="expense_date")
+	private Date expenseDate;
 	
 	@Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="dd/MM/yyyy")
@@ -122,6 +126,14 @@ public class Expense {
 		this.subCategoryId = subCategoryId;
 	}
 
+	public Date getExpenseDate() {
+		return expenseDate;
+	}
+
+	public void setExpenseDate(Date expenseDate) {
+		this.expenseDate = expenseDate;
+	}
+
 	@PrePersist
 	protected void prePersist() {
 		if (this.createdAt == null)
@@ -139,5 +151,6 @@ public class Expense {
 	protected void preRemove() {
 		this.updatedAt = new Date();
 	}
+
 
 }

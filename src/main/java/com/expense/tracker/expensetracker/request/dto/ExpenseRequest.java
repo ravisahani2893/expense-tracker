@@ -1,6 +1,9 @@
 package com.expense.tracker.expensetracker.request.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -19,6 +22,11 @@ public class ExpenseRequest {
 
 	@NotNull(message="Sub Category Id should not be null.")
 	private Long subCategoryId;
+
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@NotNull(message="Expense Date should not be null.")
+	private Date expenseDate;
 
 	public BigDecimal getAmount() {
 		return amount;
@@ -58,5 +66,13 @@ public class ExpenseRequest {
 
 	public void setSubCategoryId(Long subCategoryId) {
 		this.subCategoryId = subCategoryId;
+	}
+
+	public Date getExpenseDate() {
+		return expenseDate;
+	}
+
+	public void setExpenseDate(Date expenseDate) {
+		this.expenseDate = expenseDate;
 	}
 }

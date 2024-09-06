@@ -69,6 +69,7 @@ public class ExpenseService {
 		expense.setSubCategoryId(subCategory);
 		expense.setPayment(paymentType);
 		expense.setExpenseAmount(request.getAmount());
+		expense.setExpenseDate(request.getExpenseDate());
 		expense.setExpenseDescription(request.getExpenseDescription());
 		return repository.save(expense);
 
